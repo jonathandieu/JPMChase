@@ -1,0 +1,44 @@
+From f19cb5853fe9b6d54b371de91a9050efdf00d2a5 Mon Sep 17 00:00:00 2001
+From: jonathanhuydieu <jonathanhuydieu@gmail.com>
+Date: Thu, 13 May 2021 23:49:17 -0400
+Subject: [PATCH] Augmented most methods but still one bug to squish
+
+---
+ client3.py | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/client3.py b/client3.py
+index f1771c3..7228091 100644
+--- a/client3.py
++++ b/client3.py
+@@ -35,14 +35,16 @@ def getDataPoint(quote):
+ 	stock = quote['stock']
+ 	bid_price = float(quote['top_bid']['price'])
+ 	ask_price = float(quote['top_ask']['price'])
+-	price = bid_price
++	price = (bid_price + ask_price) / 2 # Altered this line to get the correct stock price
+ 	return stock, bid_price, ask_price, price
+ 
+ def getRatio(price_a, price_b):
+ 	""" Get ratio of price_a and price_b """
+ 	""" ------------- Update this function ------------- """
+ 	""" Also create some unit tests for this function in client_test.py """
+-	return 1
++	if (price_b == 0): # Check if the price is 0 in order to avoid dividing by 0
++		return
++	return (price_a / price_b) # Return the ratio of the prices
+ 
+ # Main
+ if __name__ == "__main__":
+@@ -54,6 +56,7 @@ if __name__ == "__main__":
+ 		""" ----------- Update to get the ratio --------------- """
+ 		for quote in quotes:
+ 			stock, bid_price, ask_price, price = getDataPoint(quote)
++			prices[stock] = price # Storing datapoints gotten from getDataPoint method in a dictionary
+ 			print ("Quoted %s at (bid:%s, ask:%s, price:%s)" % (stock, bid_price, ask_price, price))
+ 
+-		print ("Ratio %s" % getRatio(price, price))
++		print ("Ratio %s" % (getRatio(prices['ABC'], prices['DEF']))) # Altered to correct syntax
+-- 
+2.29.2.windows.3
+
