@@ -1,0 +1,24 @@
+From cfefb5f5bdbe09efdb77efb4f2cecaf3d4d19551 Mon Sep 17 00:00:00 2001
+From: jonathanhuydieu <jonathanhuydieu@gmail.com>
+Date: Fri, 14 May 2021 00:03:07 -0400
+Subject: [PATCH] Create Patch File
+
+---
+ client3.py | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/client3.py b/client3.py
+index 7228091..ae99058 100644
+--- a/client3.py
++++ b/client3.py
+@@ -54,6 +54,7 @@ if __name__ == "__main__":
+ 		quotes = json.loads(urllib.request.urlopen(QUERY.format(random.random())).read())
+ 
+ 		""" ----------- Update to get the ratio --------------- """
++		prices = {} # Create dictionary of prices
+ 		for quote in quotes:
+ 			stock, bid_price, ask_price, price = getDataPoint(quote)
+ 			prices[stock] = price # Storing datapoints gotten from getDataPoint method in a dictionary
+-- 
+2.29.2.windows.3
+
